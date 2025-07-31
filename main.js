@@ -48,7 +48,7 @@ function find_current() {
     if (fullyVisibleIndex < bestVisibleIndex) {
       console.log(
         "Fully visible element found before highest visible area element:",
-        fully_visible_element,
+        fully_visible_element
       );
       return fully_visible_element;
     }
@@ -58,7 +58,7 @@ function find_current() {
     "Visible area:",
     maxVisibleArea,
     "Element with most visible area:",
-    bestVisibleElement,
+    bestVisibleElement
   );
   return bestVisibleElement;
 }
@@ -158,7 +158,7 @@ function scroll_relative(element, containerSelector = ".region", offset = 10) {
     "element's position relative to container",
     elementPositionInContainer,
     "new scroll position with offset",
-    targetScrollTop,
+    targetScrollTop
   );
 
   // Scroll the container
