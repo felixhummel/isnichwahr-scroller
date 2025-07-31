@@ -4,3 +4,6 @@ default: format
 
 format:
 	biome format --write .
+
+build:
+	web-ext build
