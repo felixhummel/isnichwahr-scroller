@@ -46,20 +46,20 @@ function find_current() {
     const bestVisibleIndex = fieldItemsArray.indexOf(bestVisibleElement);
 
     if (fullyVisibleIndex < bestVisibleIndex) {
-      console.log(
-        "Fully visible element found before highest visible area element:",
-        fully_visible_element
-      );
+      // console.log(
+      //   "Fully visible element found before highest visible area element:",
+      //   fully_visible_element
+      // );
       return fully_visible_element;
     }
   }
 
-  console.log(
-    "Visible area:",
-    maxVisibleArea,
-    "Element with most visible area:",
-    bestVisibleElement
-  );
+  // console.log(
+  //   "Visible area:",
+  //   maxVisibleArea,
+  //   "Element with most visible area:",
+  //   bestVisibleElement
+  // );
   return bestVisibleElement;
 }
 
