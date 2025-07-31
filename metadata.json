@@ -1,0 +1,12 @@
+{
+  "version": { "license": "MIT" },
+  "categories": { "firefox": ["shopping", "bookmarks"] },
+  "homepage": {
+    "en-US": "https://www.isnichwahr.de/"
+  },
+  "requires_payment": false,
+  "summary": {
+    "en-US": "binds j/k for isnichwahr.de to scroll pic dumps",
+    "de-DE": "j/k für isnichwahr.de um pic dumps schneller scrollen zu können 🤓"
+  }
+}
