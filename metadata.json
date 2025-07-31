@@ -6,7 +6,6 @@
   },
   "requires_payment": false,
   "summary": {
-    "en-US": "binds j/k for isnichwahr.de to scroll pic dumps",
-    "de-DE": "j/k für isnichwahr.de um pic dumps schneller scrollen zu können 🤓"
+    "en-US": "binds j/k for isnichwahr.de to scroll pic dumps"
   }
 }

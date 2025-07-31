@@ -7,3 +7,6 @@ format:
 
 build:
 	web-ext build
+
+sign:
+	./bin/sign.sh
