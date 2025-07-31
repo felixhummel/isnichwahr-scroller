@@ -1,0 +1,11 @@
+{
+	"manifest_version": 2,
+	"name": "isnichwahr scroller",
+	"version": "1.0",
+	"content_scripts": [
+		{
+			"matches": ["https://www.isnichwahr.de/*"],
+			"js": ["main.js"]
+		}
+	]
+}
