@@ -2,7 +2,7 @@
   "version": { "license": "MIT" },
   "categories": { "firefox": ["shopping", "bookmarks"] },
   "homepage": {
-    "en-US": "https://www.isnichwahr.de/"
+    "en-US": "https://github.com/felixhummel/isnichwahr-scroller"
   },
   "requires_payment": false,
   "summary": {
