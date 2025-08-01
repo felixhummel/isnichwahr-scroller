@@ -1,66 +1,20 @@
+function header_offset() {
+  return document.querySelector(".main-container").offsetTop;
+}
+
 function find_current() {
-  // Get the field-item with the most visible area in viewport
-  const fieldItems = document.querySelectorAll("div.field-item");
-  let maxVisibleArea = 0;
-  let bestVisibleElement = null;
-  let fully_visible_element = null;
+  const candidates = document.querySelectorAll("div.field-item");
 
-  for (const el of fieldItems) {
-    const rect = el.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    const viewportWidth = window.innerWidth;
-
-    // Check if element is fully visible
-    const isFullyVisible =
-      rect.top >= 0 &&
-      rect.bottom <= viewportHeight &&
-      rect.left >= 0 &&
-      rect.right <= viewportWidth;
-
-    if (isFullyVisible && !fully_visible_element) {
-      fully_visible_element = el;
-    }
-
-    // Calculate visible area
-    const visibleTop = Math.max(0, rect.top);
-    const visibleBottom = Math.min(viewportHeight, rect.bottom);
-    const visibleLeft = Math.max(0, rect.left);
-    const visibleRight = Math.min(viewportWidth, rect.right);
-
-    // Check if element is visible at all
-    if (visibleTop < visibleBottom && visibleLeft < visibleRight) {
-      const visibleArea =
-        (visibleBottom - visibleTop) * (visibleRight - visibleLeft);
-
-      if (visibleArea > maxVisibleArea) {
-        maxVisibleArea = visibleArea;
-        bestVisibleElement = el;
-      }
+  for (const candidate of candidates) {
+    const rect = candidate.getBoundingClientRect();
+    // Check if element is visible in viewport (at least partially)
+    if (rect.bottom > header_offset() + 20 && rect.top < window.innerHeight) {
+      return candidate;
     }
   }
 
-  // If we have a fully visible element and it comes before the best visible element, use it
-  if (fully_visible_element && bestVisibleElement) {
-    const fieldItemsArray = Array.from(fieldItems);
-    const fullyVisibleIndex = fieldItemsArray.indexOf(fully_visible_element);
-    const bestVisibleIndex = fieldItemsArray.indexOf(bestVisibleElement);
-
-    if (fullyVisibleIndex < bestVisibleIndex) {
-      // console.log(
-      //   "Fully visible element found before highest visible area element:",
-      //   fully_visible_element
-      // );
-      return fully_visible_element;
-    }
-  }
-
-  // console.log(
-  //   "Visible area:",
-  //   maxVisibleArea,
-  //   "Element with most visible area:",
-  //   bestVisibleElement
-  // );
-  return bestVisibleElement;
+  // Fallback to first element if none are visible
+  return candidates[0] || document.querySelector("div.field-item");
 }
 
 function get_next(el) {
@@ -90,7 +44,10 @@ function get_prev(el) {
 }
 
 function jump_to_next() {
-  const e = get_next(find_current());
+  const c = find_current();
+  console.log("current", c);
+  const e = get_next(c);
+  console.log("next", e);
   scroll_to(e);
 }
 
