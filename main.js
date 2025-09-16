@@ -4,7 +4,7 @@ function header_offset() {
 }
 
 function find_current() {
-  const candidates = document.querySelectorAll("article");
+  const candidates = document.querySelectorAll("div.picdump-image-container");
 
   for (const candidate of candidates) {
     const rect = candidate.getBoundingClientRect();
@@ -14,14 +14,14 @@ function find_current() {
     }
   }
   // Fallback to first element if none are visible
-  return candidates[0] || document.querySelector("article");
+  return candidates[0] || document.querySelector("div.picdump-image-container");
 }
 
 function get_next(el) {
   let sibling = el.nextElementSibling;
 
   while (sibling) {
-    if (sibling.tagName === "ARTICLE") {
+    if (sibling.classList?.contains("picdump-image-container")) {
       return sibling;
     }
     sibling = sibling.nextElementSibling;
@@ -33,7 +33,7 @@ function get_prev(el) {
   let sibling = el.previousElementSibling;
 
   while (sibling) {
-    if (sibling.tagName === "ARTICLE") {
+    if (sibling.classList?.contains("picdump-image-container")) {
       return sibling;
     }
     sibling = sibling.previousElementSibling;
