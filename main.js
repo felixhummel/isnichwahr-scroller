@@ -1,45 +1,43 @@
 function header_offset() {
-  return document.querySelector(".main-container").offsetTop;
+  const header = document.querySelector("header");
+  return header ? header.offsetTop : 0;
 }
 
 function find_current() {
-  const candidates = document.querySelectorAll("div.field-item");
+  const candidates = document.querySelectorAll("article");
 
   for (const candidate of candidates) {
     const rect = candidate.getBoundingClientRect();
-    // Check if element is visible in viewport (at least partially)
-    if (rect.bottom > header_offset() + 20 && rect.top < window.innerHeight) {
+    const top_visible = rect.top > 0 && rect.top < window.innerHeight
+    if (top_visible) {
       return candidate;
     }
   }
-
   // Fallback to first element if none are visible
-  return candidates[0] || document.querySelector("div.field-item");
+  return candidates[0] || document.querySelector("article");
 }
 
 function get_next(el) {
   let sibling = el.nextElementSibling;
 
   while (sibling) {
-    if (sibling.classList?.contains("field-item")) {
+    if (sibling.tagName === "ARTICLE") {
       return sibling;
     }
     sibling = sibling.nextElementSibling;
   }
-
-  return null; // No next sibling with class "field-item" found
+  return null; // No next article sibling found
 }
 
 function get_prev(el) {
   let sibling = el.previousElementSibling;
 
   while (sibling) {
-    if (sibling.classList?.contains("field-item")) {
+    if (sibling.tagName === "ARTICLE") {
       return sibling;
     }
     sibling = sibling.previousElementSibling;
   }
-
   return null; // No previous sibling with class "field-item" found
 }
 
@@ -76,7 +74,7 @@ document.addEventListener("keydown", (event) => {
 function scroll_to(element, offset = 10) {
   const elementRect = element.getBoundingClientRect();
   const absoluteTop = elementRect.top + window.pageYOffset;
-  const containerOffset = document.querySelector(".main-container").offsetTop;
+  const containerOffset = document.querySelector("main.container").offsetTop;
 
   // Calculate scroll position with offset
   const targetPosition = absoluteTop - containerOffset - offset;
@@ -87,45 +85,12 @@ function scroll_to(element, offset = 10) {
   });
 }
 
-function scroll_relative(element, containerSelector = ".region", offset = 10) {
-  const container = document.querySelector(containerSelector);
-  if (!container) {
-    console.error(`Container with selector "${containerSelector}" not found`);
-    return;
-  }
+console.log("isnichwahr scroller loaded");
 
-  // Get positions relative to the container
-  const elementRect = element.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("find current", find_current());
+  // console.log("next", get_next(find_current()));
+  //
+  // jump_to_next();
+});
 
-  // Calculate element's position relative to container
-  const elementPositionInContainer = elementRect.top - containerRect.top;
-
-  // Calculate new scroll position with offset
-  const targetScrollTop =
-    container.scrollTop + elementPositionInContainer - offset;
-
-  console.log(
-    "scroll_to",
-    "container",
-    container,
-    "positions relative to the container",
-    elementRect,
-    containerRect,
-    "element's position relative to container",
-    elementPositionInContainer,
-    "new scroll position with offset",
-    targetScrollTop
-  );
-
-  // Scroll the container
-  container.scrollTo({
-    top: targetScrollTop,
-    behavior: "smooth", // Optional: for smooth scrolling
-  });
-}
-
-// console.log("find current", find_current());
-// console.log("next", get_next(find_current()));
-//
-// jump_to_next();
